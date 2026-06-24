@@ -1,4 +1,4 @@
-﻿
+
 /*
 پروژه سیستم مدیریت کارمندان
 آرمان داخته ورنکش
@@ -23,27 +23,67 @@ dept_location  varchar2(20) default 'Tehran'
 --پر کردن جدول دپارتمان
 
 
+declare
+v_id number;
+begin
+select ad_dept_seq.nextval into v_id from dual;
 insert into tbl_ad_departments(
 dept_id,dept_name,dept_location)
-values(ad_dept_seq.nextval,'Afagh Tejarat Negin','Mashhad');
+values(v_id,'Afagh Tejarat Negin','Mashhad');
 
+commit;
+end;
+
+declare
+v_id number;
+begin
+select ad_dept_seq.nextval into v_id from dual;
 insert into tbl_ad_departments(
 dept_id,dept_name,dept_location)
 values(ad_dept_seq.nextval,'Pasargad Machine','Tehran');
+
+commit;
+
+end;
+declare
+v_id number;
+begin
+select ad_dept_seq.nextval into v_id from dual;
 
 insert into tbl_ad_departments(
 dept_id,dept_name,dept_location)
 values(ad_dept_seq.nextval,'Modiran Khodro','Sary');
 
+commit;
+
+end;
+
+declare
+v_id number;
+begin
+select ad_dept_seq.nextval into v_id from dual;
+
 insert into tbl_ad_departments(
 dept_id,dept_name,dept_location)
 values(ad_dept_seq.nextval,'Negin Ofogh Pars','Tehran');
+
+commit;
+
+end;
+declare
+v_id number;
+begin
+select ad_dept_seq.nextval into v_id from dual;
 
 insert into tbl_ad_departments(
 dept_id,dept_name,dept_location)
 values(ad_dept_seq.nextval,'Caspian','Tehran');
 
 commit;
+
+end;
+
+
 
 /
 
@@ -96,36 +136,41 @@ max_salary  number  check(max_salary>0)
 --وارد کردن مشاغل
 
 INSERT INTO tbl_ad_jobs (job_id,job_title,min_salary,max_salary)
-values('ADMIN','SYSTEM ADMIN',30000,70000);
+values(11,'SYSTEM ADMIN',30000,70000);
+
 
 INSERT INTO tbl_ad_jobs (job_id,job_title,min_salary,max_salary)
-values('SALES','FOROUSHANDE',30000,85000);
+values(12,'SELLER',30000,85000);
 
 INSERT INTO tbl_ad_jobs (job_id,job_title,min_salary,max_salary)
-values('IT_PROG','BARNAME NEVIS',40000,90000);
+values(13,'BARNAME NEVIS',40000,90000);
+
 
 INSERT INTO tbl_ad_jobs (job_id,job_title,min_salary,max_salary)
-values('HR_MGR','HUMAN RESOURCES MANAGER',60000,110000);
+values(14,'HUMAN RESOURCES MANAGER',60000,110000);
+
 
 INSERT INTO tbl_ad_jobs (job_id,job_title,min_salary,max_salary)
-values('FI_ACC','FINANCE ACCOUNTANT',30000,90000);
+values(15,'FINANCE ACCOUNTANT',30000,90000);
+
 
 INSERT INTO tbl_ad_jobs (job_id,job_title,min_salary,max_salary)
-values('SUPPORT','POSHTIBAN',30000,75000);
+values(16,'POSHTIBAN',30000,75000);
+
 
 INSERT INTO tbl_ad_jobs (job_id,job_title,min_salary,max_salary)
-values('MK_MGR','MARKETING MANAGER',60000,100000);
+values(17,'MARKETING MANAGER',60000,100000);
+
 
 INSERT INTO tbl_ad_jobs (job_id,job_title,min_salary,max_salary)
-values('MK_REP','MARKETING REPRESENTATIVE',35000,85000);
+values(18,'MARKETING REPRESENTATIVE',35000,85000);
+
 
 INSERT INTO tbl_ad_jobs (job_id,job_title,min_salary,max_salary)
-values('SALE_MGR','SALE MANAGER',60000,110000);
+values(19,'SALE MANAGER',60000,110000);
 
 INSERT INTO tbl_ad_jobs (job_id,job_title,min_salary,max_salary)
-values('HR_REP','HUMAN RESOURCES REPRESENTATIVE',40000,850000);
-
-COMMIT;
+values(20,'HUMAN RESOURCES REPRESENTATIVE',40000,850000);
 
 /
 
@@ -182,7 +227,7 @@ email         varchar2(100) unique not null,
 hire_date      date default sysdate,
 salary        number check (salary>0),
 dept_id       number references tbl_ad_departments(dept_id),
-job_id        varchar2(20) references tbl_ad_jobs(job_id)
+job_id        NUMBER references tbl_ad_jobs(job_id)
 );
 
 /
@@ -193,106 +238,240 @@ create index idx_emp_sal on tbl_ad_employees(salary);
 
 --پر کردن جدول کارمندان
 
-insert into tbl_ad_employees (emp_id,first_name,last_name,
-national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Arman','Dakhte','0024812765','09966007514',
-'armandakhte@gmail.com','15-jun-2026',35000,10 ,'sales');
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Sahar','Sabeti','0016985477','09124581257',
-'saharsabeti@gmail.com','02-feb-2024',50000,20,'IT_PROG');
+values(v_emp_id,'Arman','Dakhte','0024812765','09966007514',
+'armandakhte@gmail.com',to_date('2026-02-15','yyyy-mm-dd'),35000,101 ,12);
+commit;
+end;
 
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Seyyed Mohammad','Moosavi','4175895125','09366584751',
-'seyyedmohammadmoosavi@gmail.com','17-oct-2021',80000,30,'HR_MGR');
+values(v_emp_id,'Sahar','Sabeti','0016985477','09124581257',
+'saharsabeti@gmail.com',to_date('2024-02-02','yyyy-mm-dd'),50000,103,13);
+commit;
+end;
 
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Hamed','Mohseni','0035487951','09015874125',
-'hamedmohseni@gmail.com','20-aug-2023',48000,40,'FI_ACC');
+values(v_emp_id,'Seyyed Mohammad','Moosavi','4175895125','09366584751',
+'seyyedmohammadmoosavi@gmail.com',to_date('2021-09-17','yyyy-mm-dd'),80000,105,14);
+commit;
+end;
 
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Marjan','Kamali','5143256879','09125874125',
-'marjankamali@gmail.com','22-apr-2022',52000,50,'IT_PROG');
+values(v_emp_id,'Hamed','Mohseni','0035487951','09015874125',
+'hamedmohseni@gmail.com',to_date('2023-08-20','yyyy-mm-dd'),48000,122,15);
+commit;
+end;
 
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Ali','Mohebi','0015874589','09115879112',
-'alimohebi@gmail.com','16-apr-2025',38000,10,'admin');
+values(v_emp_id,'Marjan','Kamali','5143256879','09125874125',
+'marjankamali@gmail.com',to_date('2022-04-22','yyyy-mm-dd'),52000,124,13);
+commit;
+end;
 
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Setare','Solati','0025847751','09355884123',
-'setaresolati@gmail.com','08-sep-2021',75000,20,'support');
+values(v_emp_id,'Ali','Mohebi','0015874589','09115879112',
+'alimohebi@gmail.com',to_date('2025-04-16','yyyy-mm-dd'),38000,101,11);
+commit;
+end;
 
 
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Maryam','Rezaee','2365879512','09165874410',
-'maryamrezaee@gmail.com','11-dec-2025',40000,30,'MK_REP');
+values(v_emp_id,'Setare','Solati','0025847751','09355884123',
+'setaresolati@gmail.com',to_date('2021-08-08','yyyy-mm-dd'),75000,103,16);
+commit;
+end;
 
+
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Ali','Mahdavi','5289663241','09336658120',
-'alimahdavi@gmail.com','11-nov-2022',65000,40,'support');
+values(v_emp_id,'Maryam','Rezaee','2365879512','09165874410',
+'maryamrezaee@gmail.com',to_date('2025-11-11','yyyy-mm-dd'),40000,105,18);
+commit;
+end;
 
+
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Erfan','Mahdavi','0058954788','09233598552',
-'erfanmahdavi@gmail.com','26-jan-2019',100000,50,'SALE_MGR');
+values(v_emp_id,'Ali','Mahdavi','5289663241','09336658120',
+'alimahdavi@gmail.com',to_date('2022-10-09','yyyy-mm-dd'),65000,122,16);
+commit;
+end;
 
+
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Mohammad','Alavi','0015875214','09228510269',
-'mohammadalavi@gmail.com','09-aug-2023',58000,10,'support');
+values(v_emp_id,'Erfan','Mahdavi','0058954788','09233598552',
+'erfanmahdavi@gmail.com',to_date('2019-01-26','yyyy-mm-dd'),100000,124,19);
+commit;
+end;
 
+
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Melika','Shaabani','5210897410','09350221475',
-'melikashaabani@gmail.com','20-mar-2020',90000,20,'FI_ACC');
+values(v_emp_id,'Mohammad','Alavi','0015875214','09228510269',
+'mohammadalavi@gmail.com',to_date('2023-09-09','yyyy-mm-dd'),58000,101,16);
+commit;
+end;
 
+
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Mahsa','Kave','9652001859','09365487110',
-'mahsakave@gmail.com','19-jan-2024',52000,30,'HR_REP');
+values(v_emp_id,'Melika','Shaabani','5210897410','09350221475',
+'melikashaabani@gmail.com',to_date('2020-07-20','yyyy-mm-dd'),90000,103,15);
+commit;
+end;
 
+
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Fariba','Kamali','0042587963','09135587441',
-'faribakamali@gmail.com','01-jul-2022',60000,40,'ADMIN');
+values(v_emp_id,'Mahsa','Kave','9652001859','09365487110',
+'mahsakave@gmail.com',to_date('2024-01-19','yyyy-mm-dd'),52000,105,20);
+commit;
+end;
 
+
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Hossein','Sadeghi','2587741023','09125823331',
-'hosseinsadeghi@gmail.com','01-feb-2021',77000,50,'SALES');
+values(v_emp_id,'Fariba','Kamali','0042587963','09135587441',
+'faribakamali@gmail.com',to_date('2022-05-01','yyyy-mm-dd'),60000,122,11);
+commit;
+end;
 
+
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Peyman','Vahedi','0102511423','09115240311',
-'peymanvahedi@gmail.com','01-sep-2025',44000,10,'HR_REP');
+values(v_emp_id,'Hossein','Sadeghi','2587741023','09125823331',
+'hosseinsadeghi@gmail.com',to_date('2021-02-01','yyyy-mm-dd'),77000,124,12);
+commit;
+end;
 
+
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Parya','Vahedi','0053665987','09132565887',
-'paryavahedi@gmail.com','09-sep-2021',68000,20,'HR_REP');
+values(v_emp_id,'Peyman','Vahedi','0102511423','09115240311',
+'peymanvahedi@gmail.com',to_date('2025-07-01','yyyy-mm-dd'),44000,101,20);
+commit;
+end;
 
+
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Solmaz','Cheraghi','0043568488','09115326875',
-'solmazcheraghi@gmail.com','20-oct-2023',70000,30,'MK_MGR');
+values(v_emp_id,'Parya','Vahedi','0053665987','09132565887',
+'paryavahedi@gmail.com',to_date('2021-07-09','yyyy-mm-dd'),68000,103,20);
+commit;
+end;
 
+
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Saleh','Hardani','0012548799','09162580123',
-'salehhardani@gmail.com','21-oct-2023',72000,40,'MK_MGR');
+values(v_emp_id,'Solmaz','Cheraghi','0043568488','09115326875',
+'solmazcheraghi@gmail.com',to_date('2023-10-19','yyyy-mm-dd'),70000,105,17);
+commit;
+end;
 
+
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
 insert into tbl_ad_employees (emp_id,first_name,last_name,
 national_id,phone,email,hire_date,salary,dept_id,job_id)
-values(ad_emp_seq.nextval,'Masoome','Moslemi','0102587965','09127117587',
-'masoomemoslemi@gmail.com','01-apr-2022',68000,50,'ADMIN');
+values(v_emp_id,'Saleh','Hardani','0012548799','09162580123',
+'salehhardani@gmail.com',to_date('2023-10-20','yyyy-mm-dd'),72000,122,17);
+commit;
+end;
+
+
+declare
+v_emp_id number;
+begin
+select ad_emp_seq.nextval into v_emp_id from dual;
+insert into tbl_ad_employees (emp_id,first_name,last_name,
+national_id,phone,email,hire_date,salary,dept_id,job_id)
+values(v_emp_id,'Masoome','Moslemi','0102587965','09127117587',
+'masoomemoslemi@gmail.com',to_date('2022-04-01','yyyy-mm-dd'),68000,124,11);
+commit;
+end;
 
 
 /
@@ -307,7 +486,7 @@ p_phone IN VARCHAR2,
 p_email IN VARCHAR2,
 p_salary IN NUMBER,
 p_dept_id IN NUMBER,
-p_job_id IN VARCHAR2,
+p_job_id IN NUMBER,
 p_result OUT VARCHAR2
 )
 IS
@@ -456,6 +635,7 @@ p_percent in number,
 p_result out varchar2
 );
 end;
+/
 
 create or replace package body pkg_ad_emp 
 is
